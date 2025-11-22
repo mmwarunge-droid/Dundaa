@@ -1,0 +1,1 @@
+I'd like to add some images in the background and separate landing pages/sections

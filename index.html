@@ -1,14 +1,14 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>  
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dundaa - Plug, Play and Vibe</title>
 
-    <meta name="keywords" content="dundaa, plug, play, vibe, music, streaming, audio, entertainment">
-    <meta name="description" content="Dundaa is your go-to platform for seamless music streaming and entertainment. Plug in, play your favorite tracks, and vibe with the rhythm of life.">
+    <meta name="keywords" content="dundaa, plug, play, vibe, music, streaming, audio, entertainment" />
+    <meta name="description" content="Dundaa is your go-to platform for seamless music streaming and entertainment. Plug in, play your favorite tracks, and vibe with the rhythm of life." />
 
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
     <style>
         /* --------- GLOBAL STYLES --------- */
@@ -56,35 +56,62 @@
             color: #D4AF37;
         }
 
-        /* --------- HERO SECTION WITH SLIDESHOW --------- */
+        /* ---------- HERO PHONE BACKGROUND + SCREEN SLIDESHOW ---------- */
         .hero {
-            padding: 120px 40px;
-            color: #fff;
             position: relative;
-            overflow: hidden;
+            padding: 140px 40px;
+            color: #fff;
 
+            /* permanent mobile phone background */
+            background-image: url("background1.jpg");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            animation: heroSlide 15s infinite;
+
+            height: 550px; /* adjust based on your preferred hero size */
         }
 
-        @keyframes heroSlide {
-            0%   { background-image: url("images/hero1.jpg"); }
-            33%  { background-image: url("images/hero2.jpg"); }
-            66%  { background-image: url("images/hero3.jpg"); }
-            100% { background-image: url("images/hero1.jpg"); }
+        /* Phone screen container positioned over the background */
+        .phone-screen {
+            position: absolute;
+            top: 52%;       /* adjust to align with phone screen */
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            width: 330px;   /* adjust to fit phone screen */
+            height: 160px;
+            border-radius: 20px;
+
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
         }
 
-        /* smooth fade */
-        .hero {
+        /* Slideshow images inside the phone screen */
+        .phone-slides {
+            width: 100%;
+            height: 100%;
+            animation: slideShow 20s infinite;
+            background-size: cover;
+            background-position: center;
             animation-timing-function: ease-in-out;
-            transition: background-image 1s ease-in-out;
+        }
+
+        @keyframes slideShow {
+            0%   { background-image: url("images/home.jpg"); }
+            25%  { background-image: url("images/african.jpg"); }
+            50%  { background-image: url("images/barbecue.jpg"); }
+            75%  { background-image: url("images/zipline.jpg"); }
+            100% { background-image: url("images/home.jpg"); }
         }
 
         .hero h2 {
             font-size: 42px;
             color: #D4AF37;
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+            margin-top: 20px;
         }
 
         .hero p {
@@ -92,6 +119,8 @@
             color: #C0C0C0;
             line-height: 1.8;
             margin-top: 15px;
+            position: relative;
+            z-index: 10;
         }
 
         /* --------- CONTENT SECTIONS --------- */
@@ -167,14 +196,25 @@
 
             .hero {
                 padding: 80px 20px;
+                height: 450px;
+            }
+
+            .phone-screen {
+                width: 250px;
+                height: 120px;
+                top: 52%;
             }
 
             section {
                 padding: 40px 20px;
             }
+
+            .hero h2 {
+                font-size: 32px;
+            }
         }
 
-        /* --------- FORM --------- */
+        /* --------- REGISTRATION FORM --------- */
         form {
             background-color: #111;
             padding: 25px;
@@ -248,7 +288,60 @@ Whether you’re an event organizer, an influencer looking for the next vibe, or
 
     <input type="submit" value="Download App" style="margin: 20px; padding: 10px 20px; background-color: #D4AF37; color: #000; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
 
-    <!-- REST OF YOUR PAGE... -->
+<!-- --------- DISCOVER --------- -->
+    <section id="discover">
+        <h2>Mko Wapi?</h2>
+        <p>Discover the hottest hangouts, browse trending events, drop a review, or even share where you’re chilling right now—complete with your location and why everyone should pull up.</p>
+
+        <p>Find the vibe. Be the vibe. Dundaa!</p>
+
+        <ul class="gallery">
+            <li><img src="images/house.jpg" alt="Beach"><a href="page1.html">View More</a></li>
+            <li><img src="images/club.jpg" alt="Lighthouse"><a href="page2.html">View More</a></li>
+            <li><img src="images/kesha.jpg" alt="Sunset"><a href="page3.html">View More</a></li>
+            <li><img src="images/road.jpg" alt="Road"><a href="page4.html">View More</a></li>
+            <li><img src="images/camping.jpg" alt="Camping"><a href="page5.html">View More</a></li>
+            <li><img src="images/restaurant.jpg" alt="Restaurant"><a href="page6.html">View More</a></li>
+        </ul>
+    </section>
+
+    <!-- --------- COMMUNITY --------- -->
+    <section id="community">
+        <h2>Join the Dundaa Community</h2>
+        <ol>
+            <li>Share your music tastes and playlists.</li>
+            <li>Engage in discussions about your favorite tracks.</li>
+            <li>Collaborate with artists and influencers.</li>
+        </ol>
+
+        <p style="margin-top:20px; max-width:700px; color:#C0C0C0;">
+            Discover the hottest hangouts, browse trending events, drop a review, or share where you’re chilling right now—complete with your location and why everyone should pull up.  
+            Dundaa is not just about music; it's about connection, culture, and the ultimate vibe.
+        </p>
+    </section>
+
+    <!-- --------- REGISTER --------- -->
+    <section id="register">
+        <h2>Register Now</h2>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" required>
+
+            <input type="submit" value="Register">
+        </form>
+    </section>
+
+    <!-- --------- FOOTER --------- -->
+    <footer>
+        <p>&copy; 2025 Dundaa. All rights reserved.</p>
+        <p>Find the vibe. Be the vibe. Dundaa!</p>
+    </footer>
 
 </body>
 </html>
