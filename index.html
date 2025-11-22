@@ -1,0 +1,254 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dundaa - Plug, Play and Vibe</title>
+
+    <meta name="keywords" content="dundaa, plug, play, vibe, music, streaming, audio, entertainment">
+    <meta name="description" content="Dundaa is your go-to platform for seamless music streaming and entertainment. Plug in, play your favorite tracks, and vibe with the rhythm of life.">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+        /* --------- GLOBAL STYLES --------- */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #0D0D0D;
+            color: #f8f8f8;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        a {
+            color: #D4AF37;
+            text-decoration: none;
+        }
+
+        /* --------- NAVBAR --------- */
+        header {
+            background-color: #111;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        header h1 {
+            color: #D4AF37;
+            font-size: 28px;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            margin-left: 25px;
+            font-size: 16px;
+            color: #C0C0C0;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #D4AF37;
+        }
+
+        /* --------- HERO SECTION WITH SLIDESHOW --------- */
+        .hero {
+            padding: 120px 40px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            animation: heroSlide 15s infinite;
+        }
+
+        @keyframes heroSlide {
+            0%   { background-image: url("images/hero1.jpg"); }
+            33%  { background-image: url("images/hero2.jpg"); }
+            66%  { background-image: url("images/hero3.jpg"); }
+            100% { background-image: url("images/hero1.jpg"); }
+        }
+
+        /* smooth fade */
+        .hero {
+            animation-timing-function: ease-in-out;
+            transition: background-image 1s ease-in-out;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            color: #D4AF37;
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: #C0C0C0;
+            line-height: 1.8;
+            margin-top: 15px;
+        }
+
+        /* --------- CONTENT SECTIONS --------- */
+        section {
+            padding: 60px 40px;
+            border-top: 1px solid #222;
+        }
+
+        section h2 {
+            font-size: 28px;
+            color: #D4AF37;
+            margin-bottom: 20px;
+        }
+
+        ul, ol {
+            line-height: 1.7;
+            color: #C0C0C0;
+        }
+
+        /* --------- GALLERY STYLES --------- */
+        .gallery {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            text-align: center;
+        }
+
+        .gallery li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gallery img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid #333;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.06);
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.8);
+        }
+
+        .gallery li a {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #D4AF37;
+        }
+
+        .gallery li a:hover {
+            text-decoration: underline;
+        }
+
+        /* --------- RESPONSIVENESS --------- */
+        @media (max-width: 1024px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gallery {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .hero {
+                padding: 80px 20px;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+        }
+
+        /* --------- FORM --------- */
+        form {
+            background-color: #111;
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 400px;
+            border: 1px solid #333;
+        }
+
+        form label {
+            display: block;
+            margin-top: 15px;
+            color: #C0C0C0;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            background-color: #222;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        form input[type="submit"] {
+            margin-top: 20px;
+            background-color: #D4AF37;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #b8922c;
+        }
+
+        /* --------- FOOTER --------- */
+        footer {
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid #222;
+            background-color: #0A0A0A;
+            color: #888;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV BAR -->
+    <header>
+        <h1>Dundaa</h1>
+        <nav>
+            <a href="#discover">Home</a>
+            <a href="#community">Mko Wapi?</a>
+            <a href="#register">Events</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h2>Usikose Sherehe</h2>
+        <p>Dundaa is your ultimate plug for what’s popping in the 254!
+Whether you’re an event organizer, an influencer looking for the next vibe, or someone chasing the perfect scene, Dundaa has you covered.</p>
+    </section>
+
+    <input type="submit" value="Download App" style="margin: 20px; padding: 10px 20px; background-color: #D4AF37; color: #000; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+
+    <!-- REST OF YOUR PAGE... -->
+
+</body>
+</html>
