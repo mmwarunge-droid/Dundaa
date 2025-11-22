@@ -1,4 +1,4 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -25,7 +25,7 @@
         }
 
         a {
-            color: #D4AF37;
+            color: #f5f5f5;
             text-decoration: none;
         }
 
@@ -41,7 +41,7 @@
 
         header h1 {
             color: #D4AF37;
-            font-size: 28px;
+            font-size: 40px;
             letter-spacing: 1px;
         }
 
@@ -56,67 +56,30 @@
             color: #D4AF37;
         }
 
-        /* ---------- HERO PHONE BACKGROUND + SCREEN SLIDESHOW ---------- */
+        /* --------- HERO SECTION --------- */
         .hero {
             position: relative;
             padding: 140px 40px;
             color: #fff;
-
-            /* permanent mobile phone background */
-            background-image: url("background1.jpg");
+            background-image: url("images/home.jpg");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-
-            height: 550px; /* adjust based on your preferred hero size */
-        }
-
-        /* Phone screen container positioned over the background */
-        .phone-screen {
-            position: absolute;
-            top: 52%;       /* adjust to align with phone screen */
-            left: 50%;
-            transform: translate(-50%, -50%);
-
-            width: 330px;   /* adjust to fit phone screen */
-            height: 160px;
-            border-radius: 20px;
-
-            overflow: hidden;
-            background: #000;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
-        }
-
-        /* Slideshow images inside the phone screen */
-        .phone-slides {
-            width: 100%;
-            height: 100%;
-            animation: slideShow 20s infinite;
-            background-size: cover;
-            background-position: center;
-            animation-timing-function: ease-in-out;
-        }
-
-        @keyframes slideShow {
-            0%   { background-image: url("images/home.jpg"); }
-            25%  { background-image: url("images/african.jpg"); }
-            50%  { background-image: url("images/barbecue.jpg"); }
-            75%  { background-image: url("images/zipline.jpg"); }
-            100% { background-image: url("images/home.jpg"); }
+            height: 550px; /* adjust height as needed */
         }
 
         .hero h2 {
             font-size: 42px;
-            color: #D4AF37;
-            position: relative;
-            z-index: 10;
+            color: #0b0b0b;
             max-width: 600px;
             margin-top: 20px;
+            position: relative;
+            z-index: 10;
         }
 
         .hero p {
             max-width: 600px;
-            color: #C0C0C0;
+            color: #0b0b0b;
             line-height: 1.8;
             margin-top: 15px;
             position: relative;
@@ -199,12 +162,6 @@
                 height: 450px;
             }
 
-            .phone-screen {
-                width: 250px;
-                height: 120px;
-                top: 52%;
-            }
-
             section {
                 padding: 40px 20px;
             }
@@ -252,16 +209,45 @@
         form input[type="submit"]:hover {
             background-color: #b8922c;
         }
+/* CONTACT SECTION WITH BACKGROUND IMAGE */
+.contact-section {
+    background-image: url("images/footer.jpg"); /* Change to your actual image path */
+    background-size: cover;        /* makes the image fill the area */
+    background-position: center;   /* centers the image */
+    background-repeat: no-repeat;
+    padding: 60px 40px;            /* spacing inside the section */
+    position: relative;
+    color: #fff;
+}
 
-        /* --------- FOOTER --------- */
-        footer {
-            text-align: center;
-            padding: 25px;
-            border-top: 1px solid #222;
-            background-color: #0A0A0A;
-            color: #888;
-            margin-top: 40px;
-        }
+/* Optional: dark overlay for better text visibility */
+.contact-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5); /* adjust darkness */
+    z-index: 0;
+}
+
+.contact-section * {
+    position: relative;
+    z-index: 1; /* ensures text & form appear above overlay */
+}
+
+        /* FOOTER WITH BACKGROUND IMAGE */
+.footer-bg {
+    border: 1px solid rgb(238, 255, 0);
+    background-image: url("images/.jpg");  /* if it's NOT inside /images */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    color: #fff;
+}
+
     </style>
 </head>
 
@@ -273,26 +259,40 @@
         <nav>
             <a href="#discover">Home</a>
             <a href="#community">Mko Wapi?</a>
-            <a href="#register">Events</a>
-            <a href="#reviews">Reviews</a>
+            <a href="#register">Dundaa Music</a>
             <a href="#contact">Contact Us</a>
+            <a href="#contact">Sign in</a>
         </nav>
     </header>
 
     <!-- HERO -->
-    <section class="hero">
-        <h2>Usikose Sherehe</h2>
-        <p>Dundaa is your ultimate plug for what’s popping in the 254!
-Whether you’re an event organizer, an influencer looking for the next vibe, or someone chasing the perfect scene, Dundaa has you covered.</p>
-    </section>
+<section class="hero">
+    <h2>Usikose Sherehe</h2>
+    <p>Dundaa is your ultimate plug for what’s popping in the 254! Whether you’re an event organizer, an influencer looking for the next vibe, or someone chasing the perfect scene, Dundaa has you covered.</p>
+    
+    <input type="submit" value="Download App" style="margin-top: 20px; padding: 10px 20px; background-color: #D4AF37; color: #000; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
 
-    <input type="submit" value="Download App" style="margin: 20px; padding: 10px 20px; background-color: #D4AF37; color: #000; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+<!-- One-line space -->
+    <div style="height: 1em;"></div>
 
-<!-- --------- DISCOVER --------- -->
+    <h3 style="margin-left: 20px;">Sign Up</h3>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" required>
+
+        <input type="submit" value="Register">
+    </form>
+</section>
+    <!-- --------- DISCOVER --------- -->
     <section id="discover">
         <h2>Mko Wapi?</h2>
         <p>Discover the hottest hangouts, browse trending events, drop a review, or even share where you’re chilling right now—complete with your location and why everyone should pull up.</p>
-
         <p>Find the vibe. Be the vibe. Dundaa!</p>
 
         <ul class="gallery">
@@ -307,41 +307,58 @@ Whether you’re an event organizer, an influencer looking for the next vibe, or
 
     <!-- --------- COMMUNITY --------- -->
     <section id="community">
-        <h2>Join the Dundaa Community</h2>
-        <ol>
-            <li>Share your music tastes and playlists.</li>
-            <li>Engage in discussions about your favorite tracks.</li>
-            <li>Collaborate with artists and influencers.</li>
-        </ol>
+    <h2>Dundaa Music</h2>
 
-        <p style="margin-top:20px; max-width:700px; color:#C0C0C0;">
-            Discover the hottest hangouts, browse trending events, drop a review, or share where you’re chilling right now—complete with your location and why everyone should pull up.  
-            Dundaa is not just about music; it's about connection, culture, and the ultimate vibe.
-        </p>
-    </section>
+    <!-- Ordered list with links -->
+    <ol>
+        <li><a href="sherehe-mixes.html">Best Sherehe mixes - Vibe with the Sickest Sherehe Mixes & Kenya’s Hottest DJs.</a></li>
+        <li><a href="artist-submit.html">Artist in the 254? Drop Your Track & Let the Squad Rate Your Flow!</a></li>
+        <li><a href="upcoming-albums.html">Fresh Drops Alert! Don’t Miss These Upcoming Bangers & Albums</a></li>
+    </ol>
 
-    <!-- --------- REGISTER --------- -->
-    <section id="register">
-        <h2>Register Now</h2>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" required>
+    <!-- Paragraph description -->
+    <p style="margin-top:20px; max-width:700px; color:#C0C0C0;">
+        Build the ultimate playlist for your sherehe and stream it nonstop—zero ads, zero interruptions. 
+        Artists, drop your latest track, EP, or album exclusively on Dundaa and even crowdfund your next hit. 
+        Listeners, discover fresh talent that’s already killing it on digital charts and get ahead of the curve!
+    </p>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
+    <!-- Creative image section -->
+    <div class="dundaa-gallery" style="display:flex; flex-wrap:wrap; gap:15px; margin-top:20px;">
+        <img src="images/deejay.jpg" alt="Sherehe Mixes" style="width:32%; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.5);">
+        <img src="images/artist.jpg" alt="Artist Performance" style="width:32%; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.5);">
+        <img src="images/album.jpg" alt="Album Drops" style="width:32%; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.5);">
+    </div>
+</section>
 
-            <label for="phone">Phone Number:</label>
-            <input type="text" id="phone" required>
+<!-- --------- CONTACT US --------- -->
+<section id="register" class="contact-section">
+    <h2 style="margin-left: 20px;">Contact Us</h2>
 
-            <input type="submit" value="Register">
-        </form>
-    </section>
+    <form action="mmwarunge@gmail.com" method="POST" enctype="text/plain">
 
-    <!-- --------- FOOTER --------- -->
-    <footer>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="Name" required>
+
+        <label for="email">Your Email/Phone Number:</label>
+        <input type="text" id="email" name="Contact" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="Message" rows="5" required></textarea>
+
+        <input type="submit" value="Send">
+    </form>
+</section>
+
+
+   <!-- --------- FOOTER --------- -->
+<footer class="footer-bg">
+    <div class="footer-overlay">
         <p>&copy; 2025 Dundaa. All rights reserved.</p>
         <p>Find the vibe. Be the vibe. Dundaa!</p>
-    </footer>
+    </div>
+</footer>
 
 </body>
 </html>
+
