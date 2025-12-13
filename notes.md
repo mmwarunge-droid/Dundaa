@@ -1,1 +1,1 @@
-I'd like to add some images in the background and separate landing pages/sections
+I'd like to create a mobile version also where images are more square/portrait as compared to web landscape ones

@@ -1,7 +1,237 @@
+/* --------- GLOBAL STYLES --------- */
 body {
-    background-color: rgb(228, 162, 47);
-    color: green;
     margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #0D0D0D;
+    color: #f8f8f8;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    font-weight: 600;
+}
+
+a {
+    color: #f5f5f5;
+    text-decoration: none;
+}
+
+/* --------- NAVBAR --------- */
+header {
+    background-color: #111;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    color: #D4AF37;
+    font-size: 40px;
+    letter-spacing: 1px;
+}
+
+nav a {
+    margin-left: 25px;
+    font-size: 16px;
+    color: #C0C0C0;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #D4AF37;
+}
+
+/* --------- HERO --------- */
+.hero {
+    position: relative;
+    padding: 140px 40px;
+    color: #fff;
+    background-image: url("images/home.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 550px;
+}
+
+.hero h2 {
+    font-size: 42px;
+    color: #0b0b0b;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+.hero p {
+    max-width: 600px;
+    color: #0b0b0b;
+    line-height: 1.8;
+    margin-top: 15px;
+}
+
+/* Download button */
+.btn-primary {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #D4AF37;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* --------- CONTENT SECTIONS --------- */
+section {
+    padding: 60px 40px;
+    border-top: 1px solid #222;
+}
+
+section h2 {
+    font-size: 28px;
+    color: #D4AF37;
+    margin-bottom: 20px;
+}
+
+ul, ol {
+    line-height: 1.7;
+    color: #C0C0C0;
+}
+
+/* --------- GALLERY --------- */
+.gallery {
+    list-style: none;
     padding: 0;
-    font-family: cursive;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    /* Images almost touching */
+    row-gap: 2px;
+    column-gap: 50px;
+
+    width: 100%;
+}
+.gallery li {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* space between image and text */
+}
+
+/* Images fill the grid perfectly */
+.gallery img {
+    width: 100%;
+    height: 100%;
+    gap: 1.2rem;
+    list-style: none;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4 / 3; /*keep consistent image ratio */
+
+    /* Reduce visual gaps */
+    border-radius: 6px;
+    border: none;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.25s ease;
+}
+
+/* Subtle hover without breaking layout */
+.gallery img:hover {
+    transform: scale(1.03);
+}
+.gallery .caption {
+    font-size: 14px;
+    color: #D4AF37;
+    text-align: center;
+}
+
+
+/* --------- RESPONSIVE --------- */
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+    .gallery {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 2px;
+    }
+}
+
+
+/* --------- FORMS --------- */
+form {
+    background-color: #111;
+    padding: 25px;
+    border-radius: 8px;
+    max-width: 400px;
+    border: 1px solid #333;
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    color: #C0C0C0;
+}
+
+form input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #fff;
+}
+
+form input[type="submit"] {
+    margin-top: 20px;
+    background-color: #D4AF37;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* --------- CONTACT SECTION --------- */
+.contact-section {
+    background-image: url("images/footer.jpg");
+    background-size: cover;
+    background-position: center;
+    padding: 60px 40px;
+    position: relative;
+    color: #fff;
+}
+
+.contact-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.contact-section * {
+    z-index: 1;
+    position: relative;
+}
+
+/* --------- FOOTER --------- */
+.footer-bg {
+    border: 1px solid rgb(238, 255, 0);
+    background-image: url("images/.jpg");
+    background-size: cover;
+    background-position: center;
+    padding: 40px 20px;
+    text-align: center;
+    color: #fff;
 }

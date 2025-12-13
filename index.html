@@ -10,245 +10,8 @@
 
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-    <style>
-        /* --------- GLOBAL STYLES --------- */
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #0D0D0D;
-            color: #f8f8f8;
-        }
-
-        h1, h2, h3 {
-            margin: 0;
-            font-weight: 600;
-        }
-
-        a {
-            color: #f5f5f5;
-            text-decoration: none;
-        }
-
-        /* --------- NAVBAR --------- */
-        header {
-            background-color: #111;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-        }
-
-        header h1 {
-            color: #D4AF37;
-            font-size: 40px;
-            letter-spacing: 1px;
-        }
-
-        nav a {
-            margin-left: 25px;
-            font-size: 16px;
-            color: #C0C0C0;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: #D4AF37;
-        }
-
-        /* --------- HERO SECTION --------- */
-        .hero {
-            position: relative;
-            padding: 140px 40px;
-            color: #fff;
-            background-image: url("images/home.jpg");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 550px; /* adjust height as needed */
-        }
-
-        .hero h2 {
-            font-size: 42px;
-            color: #0b0b0b;
-            max-width: 600px;
-            margin-top: 20px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .hero p {
-            max-width: 600px;
-            color: #0b0b0b;
-            line-height: 1.8;
-            margin-top: 15px;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* --------- CONTENT SECTIONS --------- */
-        section {
-            padding: 60px 40px;
-            border-top: 1px solid #222;
-        }
-
-        section h2 {
-            font-size: 28px;
-            color: #D4AF37;
-            margin-bottom: 20px;
-        }
-
-        ul, ol {
-            line-height: 1.7;
-            color: #C0C0C0;
-        }
-
-        /* --------- GALLERY STYLES --------- */
-        .gallery {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            text-align: center;
-        }
-
-        .gallery li {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .gallery img {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            border-radius: 10px;
-            border: 2px solid #333;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .gallery img:hover {
-            transform: scale(1.06);
-            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.8);
-        }
-
-        .gallery li a {
-            margin-top: 10px;
-            font-weight: bold;
-            color: #D4AF37;
-        }
-
-        .gallery li a:hover {
-            text-decoration: underline;
-        }
-
-        /* --------- RESPONSIVENESS --------- */
-        @media (max-width: 1024px) {
-            .gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .gallery {
-                grid-template-columns: repeat(1, 1fr);
-            }
-
-            .hero {
-                padding: 80px 20px;
-                height: 450px;
-            }
-
-            section {
-                padding: 40px 20px;
-            }
-
-            .hero h2 {
-                font-size: 32px;
-            }
-        }
-
-        /* --------- REGISTRATION FORM --------- */
-        form {
-            background-color: #111;
-            padding: 25px;
-            border-radius: 8px;
-            max-width: 400px;
-            border: 1px solid #333;
-        }
-
-        form label {
-            display: block;
-            margin-top: 15px;
-            color: #C0C0C0;
-        }
-
-        form input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            background-color: #222;
-            border: 1px solid #444;
-            border-radius: 5px;
-            color: #fff;
-        }
-
-        form input[type="submit"] {
-            margin-top: 20px;
-            background-color: #D4AF37;
-            color: #000;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        form input[type="submit"]:hover {
-            background-color: #b8922c;
-        }
-/* CONTACT SECTION WITH BACKGROUND IMAGE */
-.contact-section {
-    background-image: url("images/footer.jpg"); /* Change to your actual image path */
-    background-size: cover;        /* makes the image fill the area */
-    background-position: center;   /* centers the image */
-    background-repeat: no-repeat;
-    padding: 60px 40px;            /* spacing inside the section */
-    position: relative;
-    color: #fff;
-}
-
-/* Optional: dark overlay for better text visibility */
-.contact-section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5); /* adjust darkness */
-    z-index: 0;
-}
-
-.contact-section * {
-    position: relative;
-    z-index: 1; /* ensures text & form appear above overlay */
-}
-
-        /* FOOTER WITH BACKGROUND IMAGE */
-.footer-bg {
-    border: 1px solid rgb(238, 255, 0);
-    background-image: url("images/.jpg");  /* if it's NOT inside /images */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    padding: 40px 20px;
-    text-align: center;
-    position: relative;
-    color: #fff;
-}
-
-    </style>
+    <!-- 🔗 EXTERNAL CSS LINK -->
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
@@ -269,10 +32,9 @@
 <section class="hero">
     <h2>Usikose Sherehe</h2>
     <p>Dundaa is your ultimate plug for what’s popping in the 254! Whether you’re an event organizer, an influencer looking for the next vibe, or someone chasing the perfect scene, Dundaa has you covered.</p>
-    
-    <input type="submit" value="Download App" style="margin-top: 20px; padding: 10px 20px; background-color: #D4AF37; color: #000; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
 
-<!-- One-line space -->
+    <input type="submit" value="Download App" class="btn-primary">
+
     <div style="height: 1em;"></div>
 
     <h3 style="margin-left: 20px;">Sign Up</h3>
@@ -289,51 +51,49 @@
         <input type="submit" value="Register">
     </form>
 </section>
-    <!-- --------- DISCOVER --------- -->
-    <section id="discover">
-        <h2>Mko Wapi?</h2>
-        <p>Discover the hottest hangouts, browse trending events, drop a review, or even share where you’re chilling right now—complete with your location and why everyone should pull up.</p>
-        <p>Find the vibe. Be the vibe. Dundaa!</p>
 
-        <ul class="gallery">
-            <li><img src="images/house.jpg" alt="Beach"><a href="page1.html">View More</a></li>
-            <li><img src="images/club.jpg" alt="Lighthouse"><a href="page2.html">View More</a></li>
-            <li><img src="images/kesha.jpg" alt="Sunset"><a href="page3.html">View More</a></li>
-            <li><img src="images/road.jpg" alt="Road"><a href="page4.html">View More</a></li>
-            <li><img src="images/camping.jpg" alt="Camping"><a href="page5.html">View More</a></li>
-            <li><img src="images/restaurant.jpg" alt="Restaurant"><a href="page6.html">View More</a></li>
-        </ul>
-    </section>
+<!-- DISCOVER -->
+<section id="discover">
+    <h2>Mko Wapi?</h2>
+    <p>Discover the hottest hangouts, browse trending events, drop a review, or even share where you’re chilling right now—complete with your location and why everyone should pull up.</p>
+    <p>Find the vibe. Be the vibe. Dundaa!</p>
 
-    <!-- --------- COMMUNITY --------- -->
-    <section id="community">
+    <ul class="gallery">
+        <li><img src="images/house.jpg" alt="Beach"><a href="page1.html">View More</a></li>
+        <li><img src="images/club.jpg" alt="Lighthouse"><a href="page2.html">View More</a></li>
+        <li><img src="images/kesha.jpg" alt="Sunset"><a href="page3.html">View More</a></li>
+        <li><img src="images/road.jpg" alt="Road"><a href="page4.html">View More</a></li>
+        <li><img src="images/camping.jpg" alt="Camping"><a href="page5.html">View More</a></li>
+        <li><img src="images/restaurant.jpg" alt="Restaurant"><a href="page6.html">View More</a></li>
+    </ul>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
     <h2>Dundaa Music</h2>
 
-    <!-- Ordered list with links -->
     <ol>
         <li><a href="sherehe-mixes.html">Best Sherehe mixes - Vibe with the Sickest Sherehe Mixes & Kenya’s Hottest DJs.</a></li>
         <li><a href="artist-submit.html">Artist in the 254? Drop Your Track & Let the Squad Rate Your Flow!</a></li>
         <li><a href="upcoming-albums.html">Fresh Drops Alert! Don’t Miss These Upcoming Bangers & Albums</a></li>
     </ol>
 
-    <!-- Paragraph description -->
-    <p style="margin-top:20px; max-width:700px; color:#C0C0C0;">
+    <p style="margin-top:20px; max-width:700px;">
         Build the ultimate playlist for your sherehe and stream it nonstop—zero ads, zero interruptions. 
         Artists, drop your latest track, EP, or album exclusively on Dundaa and even crowdfund your next hit. 
         Listeners, discover fresh talent that’s already killing it on digital charts and get ahead of the curve!
     </p>
 
-    <!-- Creative image section -->
-    <div class="dundaa-gallery" style="display:flex; flex-wrap:wrap; gap:15px; margin-top:20px;">
-        <img src="images/deejay.jpg" alt="Sherehe Mixes" style="width:32%; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.5);">
-        <img src="images/artist.jpg" alt="Artist Performance" style="width:32%; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.5);">
-        <img src="images/album.jpg" alt="Album Drops" style="width:32%; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.5);">
+    <div class="dundaa-gallery">
+        <img src="images/deejay.jpg" alt="Sherehe Mixes">
+        <img src="images/artist.jpg" alt="Artist Performance">
+        <img src="images/album.jpg" alt="Album Drops">
     </div>
 </section>
 
-<!-- --------- CONTACT US --------- -->
+<!-- CONTACT -->
 <section id="register" class="contact-section">
-    <h2 style="margin-left: 20px;">Contact Us</h2>
+    <h2>Contact Us</h2>
 
     <form action="mmwarunge@gmail.com" method="POST" enctype="text/plain">
 
@@ -350,8 +110,7 @@
     </form>
 </section>
 
-
-   <!-- --------- FOOTER --------- -->
+<!-- FOOTER -->
 <footer class="footer-bg">
     <div class="footer-overlay">
         <p>&copy; 2025 Dundaa. All rights reserved.</p>
@@ -361,4 +120,3 @@
 
 </body>
 </html>
-
