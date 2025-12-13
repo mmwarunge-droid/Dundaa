@@ -5,12 +5,6 @@ body {
     background-color: #0D0D0D;
     color: #f8f8f8;
 }
-
-h1, h2, h3 {
-    margin: 0;
-    font-weight: 600;
-}
-
 a {
     color: #f5f5f5;
     text-decoration: none;
@@ -24,67 +18,120 @@ header {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #333;
-
-    position: sticky;
+    position: relative;
     top: 0;
     z-index: 1000;
 }
-
-header h1 {
-    color: #D4AF37;
-    font-size: 40px;
-    letter-spacing: 1px;
+nav {
+    display: flex;
+    gap: 150px; /* 🔥 Increase spacing here */
+    position: absolute;
+    left: 3000px;
+    top: 120px;
 }
 
 nav a {
-    margin-left: 25px;
-    font-size: 16px;
+    margin-left: 20px;
+    font-size: 48px;   /* was 32px */
     color: #C0C0C0;
-    transition: 0.3s;
 }
-
 nav a:hover {
     color: #D4AF37;
 }
-
 /* --------- HERO --------- */
+.hero-content {
+    max-width: 1000px;
+    font-size: 50px;
+    background: rgba(0, 0, 0, 0.45);
+    padding: 30px;
+    border-radius: 10px;
+    border-color: #101010;
+
+    /* 🔥 MOVE THIS BOX ANYWHERE 🔥 */
+    position: absolute;
+    left: 200px;
+    top: 450px;
+}
 .hero {
     position: relative;
-    padding: 140px 40px;
-    color: #fff;
-    background-image: url("images/home.jpg");
+    min-height: 80vh;
+    background-image: url("images/logofull.png"); /* Change to your desired background image */
     background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 550px;
+    background-position: left;
+    padding: 80px 60px;
+    display: flex;
+    align-items: center;
 }
-
 .hero h2 {
-    font-size: 42px;
-    color: #0b0b0b;
-    max-width: 600px;
-    margin-top: 20px;
+    position: relative; /*Play around with this*/
+    font-size: 160px;
+    color: #f8f5f5;
+    max-width: 600px; /*Play around with this*/
+    margin-top: 20px;/*Play around with this*/
+    margin-bottom: 12px;
 }
 
 .hero p {
-    max-width: 600px;
-    color: #0b0b0b;
-    line-height: 1.8;
-    margin-top: 15px;
+    font-size: 32px;
+    max-width: 1000px;/*Play around with this*/
+    color: #eaeaea;
+    line-height: 1.6;
 }
 
 /* Download button */
 .btn-primary {
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 10px 20px;
     background-color: #D4AF37;
     color: #000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 32px;
     font-weight: bold;
 }
+.signup-box {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-size: 30px;
+}
 
+.signup-box h3 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    color: #fff
+}
+.signup-box form {
+    background: rgba(0, 0, 0, 0.75); /* semi-transparent black background */
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 8000px; /* keeps it proportional within hero box */
+}
+
+.signup-box input[type="email"] {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    outline: none;
+}
+.signup-box button,
+.signup-box input[type="submit"],
+.signup-box a {
+    font-size: 32px;
+    background: #D4AF37;
+}
+
+.signup-box button:hover {
+    background-color: #522db1;
+}
 /* --------- CONTENT SECTIONS --------- */
 section {
     padding: 60px 40px;
@@ -99,7 +146,7 @@ section h2 {
 
 ul, ol {
     line-height: 1.7;
-    color: #C0C0C0;
+    color: #fcfafa;
 }
 
 /* --------- GALLERY --------- */
@@ -111,8 +158,8 @@ ul, ol {
     grid-template-columns: repeat(3, 1fr);
 
     /* Images almost touching */
-    row-gap: 2px;
-    column-gap: 50px;
+    row-gap: 50px;
+    column-gap: 100px;
 
     width: 100%;
 }
@@ -131,25 +178,28 @@ ul, ol {
     display: block;
     object-fit: cover;
     aspect-ratio: 4 / 3; /*keep consistent image ratio */
+    filter: grayscale(100%);
+    transition: filter 0.3s ease, transform 0.3s ease;
 
     /* Reduce visual gaps */
     border-radius: 6px;
     border: none;
-
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    transition: transform 0.25s ease;
 }
 
 /* Subtle hover without breaking layout */
 .gallery img:hover {
+    filter: grayscale(0%);
     transform: scale(1.03);
 }
+
+/* Caption styling */
 .gallery .caption {
-    font-size: 14px;
-    color: #D4AF37;
+    margin-top: 6px;
+    font-size: 400px;
+    color: #d61c1c;
     text-align: center;
 }
-
 
 /* --------- RESPONSIVE --------- */
 
@@ -167,7 +217,6 @@ ul, ol {
         gap: 2px;
     }
 }
-
 
 /* --------- FORMS --------- */
 form {
@@ -225,6 +274,50 @@ form input[type="submit"] {
     position: relative;
 }
 
+/* BUY YOUR TICKOZ */
+.dundaa-gallery {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr); /* 9 columns */
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.gallery-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.gallery-item img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.gallery-text {
+    margin-top: 8px;
+    font-size: 24px;
+    color: #C0C0C0;
+}
+
+.gallery-text a {
+    color: #f5f5f5;
+    text-decoration: underline;
+    margin: 0 2px;
+    transition: color 0.3s;
+}
+
+.gallery-text a:hover {
+    color: #D4AF37;
+}
 /* --------- FOOTER --------- */
 .footer-bg {
     border: 1px solid rgb(238, 255, 0);
@@ -234,4 +327,34 @@ form input[type="submit"] {
     padding: 40px 20px;
     text-align: center;
     color: #fff;
+}
+/* Responsive adjustments */
+@media (max-width: 1600px) {
+    .dundaa-gallery {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+@media (max-width: 1200px) {
+    .dundaa-gallery {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .dundaa-gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .dundaa-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 400px) {
+    .dundaa-gallery {
+        grid-template-columns: 1fr;
+    }
 }
