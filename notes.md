@@ -1,0 +1,1 @@
+I'd like to create a mobile version also where images are more square/portrait as compared to web landscape ones

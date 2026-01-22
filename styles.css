@@ -31,7 +31,7 @@
   --transition-slow: 0.5s ease;
 }
 
-/* ================= DARK / LIGHT MODE ================= */
+/* ---------------- BODY ---------------- */
 body {
   background-color: var(--color-bg-dark);
   color: var(--color-text-dark);
@@ -59,7 +59,7 @@ body.light-mode a {
   display: none;
 }
 
-/* ================= HEADER / NAV ================= */
+/* ---------------- HEADER / NAV ---------------- */
 .site-header {
   background: var(--color-card-bg);
   padding: var(--spacing-lg) var(--spacing-xl);
@@ -82,19 +82,11 @@ body.light-mode a {
   color: var(--color-primary);
 }
 
-/* ================= HERO ================= */
-.hero-ticket-wrapper {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: var(--spacing-xl);
-  padding: var(--spacing-xl);
-}
-
+/* ---------------- HERO ---------------- */
 .hero {
   background: url("images/logofull.png") center / cover no-repeat;
   padding: var(--spacing-xl);
   border-radius: var(--border-radius-lg);
-  transition: transform var(--transition-medium);
 }
 
 .hero h1 {
@@ -126,19 +118,7 @@ body.light-mode a {
   transform: translateY(-2px);
 }
 
-.btn-primary {
-  margin-top: var(--spacing-md);
-  padding: 14px 28px;
-  font-size: 18px;
-}
-
-.buy-btn {
-  display: inline-block;
-  margin-top: var(--spacing-xs);
-  padding: 10px 18px;
-}
-
-/* ================= SIGNUP ================= */
+/* ---------------- SIGNUP ---------------- */
 .signup-box {
   margin-top: var(--spacing-lg);
   background: rgba(0, 0, 0, 0.7);
@@ -164,7 +144,7 @@ body.light-mode a {
   border: none;
 }
 
-/* ================= TICKETS ================= */
+/* ---------------- TICKETS ---------------- */
 .tickets-panel h2 {
   font-size: var(--font-size-h2);
   margin-bottom: var(--spacing-xs);
@@ -178,7 +158,7 @@ body.light-mode a {
 
 .event-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 
@@ -205,35 +185,7 @@ body.light-mode a {
   text-align: center;
 }
 
-/* ================= DISCOVER ================= */
-.discover {
-  padding: var(--spacing-xl);
-}
-
-.discover h2 {
-  font-size: var(--font-size-h2);
-  margin-bottom: var(--spacing-md);
-}
-
-.discover-gallery {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.discover-gallery img {
-  width: 100%;
-  border-radius: var(--border-radius-sm);
-  object-fit: cover;
-  transition: transform var(--transition-medium);
-}
-
-.discover-gallery img:hover {
-  transform: scale(1.04);
-}
-
-/* ================= DJ MIXES ================= */
+/* ---------------- DJ MIXES ---------------- */
 .dj-mixes {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -245,12 +197,6 @@ body.light-mode a {
   padding: var(--spacing-xs);
   border-radius: var(--border-radius-md);
   text-align: center;
-  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-}
-
-.dj-mix-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
 }
 
 .dj-mix-card img {
@@ -258,7 +204,7 @@ body.light-mode a {
   border-radius: var(--border-radius-sm);
 }
 
-/* ================= GLOBAL AUDIO PLAYER ================= */
+/* ---------------- GLOBAL AUDIO PLAYER ---------------- */
 .global-player {
   position: fixed;
   bottom: 0;
@@ -270,7 +216,6 @@ body.light-mode a {
   gap: var(--spacing-sm);
   padding: var(--spacing-xs);
   z-index: 1000;
-  transition: transform 0.3s ease;
 }
 
 .global-player img {
@@ -293,17 +238,7 @@ body.light-mode a {
   flex: 1;
 }
 
-/* ================= CONTACT ================= */
-.contact-section {
-  background: url("images/footer.jpg") center / cover no-repeat;
-  padding: var(--spacing-xl) var(--spacing-lg);
-}
-
-.contact-section form {
-  max-width: 480px;
-}
-
-/* ================= FOOTER ================= */
+/* ---------------- FOOTER ---------------- */
 .site-footer {
   background: var(--color-card-bg);
   text-align: center;
@@ -311,17 +246,7 @@ body.light-mode a {
   border-top: 1px solid #333;
 }
 
-/* ================= RESPONSIVE ================= */
-@media (max-width: 1100px) {
-  .hero-ticket-wrapper {
-    grid-template-columns: 1fr;
-  }
-
-  .event-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
+/* ---------------- RESPONSIVE ---------------- */
 @media (max-width: 600px) {
   .event-grid,
   .discover-gallery {
@@ -331,18 +256,4 @@ body.light-mode a {
   .hero h1 {
     font-size: 42px;
   }
-}
-
-/* ================= SPOTIFY-STYLE PLAYER ANIMATION ================= */
-.global-player button {
-  background: none;
-  border: none;
-  color: var(--color-primary);
-  font-size: 24px;
-  cursor: pointer;
-  transition: transform var(--transition-fast);
-}
-
-.global-player button:hover {
-  transform: scale(1.2);
 }
