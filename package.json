@@ -1,0 +1,23 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Add Markdown here",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmwarunge-droid/Dundaa.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmwarunge-droid/Dundaa/issues"
+  },
+  "homepage": "https://github.com/mmwarunge-droid/Dundaa#readme",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}

@@ -1,278 +1,242 @@
-/* ===============================
-   DUNDAA CORE + DJ MIX PLAYER
-   =============================== */
+/* =========================================================
+   Dundaa Global Audio Player – ES6 Production Build
+   Waveform + Queue + Offline Ready
+   ========================================================= */
 
-document.addEventListener("DOMContentLoaded", initApp);
+(() => {
+  "use strict";
 
-/* ================= APP BOOTSTRAP ================= */
-function initApp() {
-    initNavigation();
-    initTicketButtons();
-    initEventCards();
-    initForms();
-    initSmoothScroll();
-    initThemeToggle();
-    initDJMixes();
-    initServiceWorker();
-}
+  /* ===================== DOM ===================== */
+  const DOM = {
+    mixesContainer: document.getElementById("dj-mixes"),
+    aiMixesContainer: document.getElementById("ai-mixes"),
 
-/* ================= NAVIGATION ================= */
-function initNavigation() {
-    const nav = document.querySelector(".main-nav");
-    const header = document.querySelector(".site-header");
-    if (!nav || !header) return;
+    player: document.getElementById("global-player"),
+    cover: document.getElementById("player-cover"),
+    title: document.getElementById("player-title"),
+    dj: document.getElementById("player-dj"),
 
-    const burger = document.createElement("button");
-    burger.className = "nav-toggle";
-    burger.setAttribute("aria-label", "Toggle navigation");
-    burger.textContent = "☰";
-    header.appendChild(burger);
+    playPauseBtn: document.getElementById("play-pause-btn"),
+    likeBtn: document.getElementById("like-btn"),
 
-    burger.addEventListener("click", () => nav.classList.toggle("nav-open"));
-    window.addEventListener("resize", () => {
-        if (window.innerWidth > 768) nav.classList.remove("nav-open");
-    });
-}
+    progressBar: document.getElementById("progress-bar"),
+    currentTime: document.getElementById("current-time"),
+    duration: document.getElementById("duration"),
 
-/* ================= TICKET BUTTONS ================= */
-function initTicketButtons() {
-    document.querySelectorAll(".buy-btn").forEach(btn => {
-        btn.addEventListener("click", e => {
-            e.preventDefault();
-            btn.textContent = "Processing...";
-            btn.style.opacity = "0.7";
-            setTimeout(() => {
-                const link = btn.getAttribute("href");
-                if (link) window.location.href = link;
-            }, 600);
-        });
-    });
-}
+    searchInput: document.getElementById("mix-search"),
+    canvas: document.getElementById("waveform"),
+  };
 
-/* ================= EVENT CARDS ================= */
-function initEventCards() {
-    document.querySelectorAll(".event-card").forEach(card => {
-        card.addEventListener("pointerenter", () => card.classList.add("active"));
-        card.addEventListener("pointerleave", () => card.classList.remove("active"));
-        card.addEventListener("click", e => {
-            const btn = card.querySelector(".buy-btn");
-            if (btn && !e.target.closest(".buy-btn")) btn.click();
-        });
-    });
-}
+  /* ===================== STATE ===================== */
+  const state = {
+    audio: new Audio(),
+    queue: [],
+    currentIndex: -1,
+    isPlaying: false,
+    audioCtx: null,
+    analyser: null,
+    sourceNode: null,
+  };
 
-/* ================= FORMS ================= */
-function initForms() {
-    document.querySelectorAll("form").forEach(form => {
-        form.addEventListener("submit", e => {
-            e.preventDefault();
-            const submitBtn = form.querySelector("button, input[type='submit']");
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.textContent = "Sending...";
-            }
-            setTimeout(() => {
-                alert("✅ Submitted successfully!");
-                form.reset();
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = "Send";
-                }
-            }, 800);
-        });
-    });
-}
+  state.audio.preload = "none";
+  state.audio.crossOrigin = "anonymous";
 
-/* ================= SMOOTH SCROLL ================= */
-function initSmoothScroll() {
-    document.querySelectorAll("a[href^='#']").forEach(anchor => {
-        anchor.addEventListener("click", e => {
-            const target = document.querySelector(anchor.getAttribute("href"));
-            if (!target) return;
-            e.preventDefault();
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-    });
-}
+  /* ===================== MIX DATA ===================== */
+  const MIXES = [
+    {
+      id: 1,
+      title: "Amapiano Nights",
+      dj: "DJ Flex",
+      cover: "./images/deejay.jpg",
+      src: "./audio/mix1.mp3",
+      ai: true,
+    },
+    {
+      id: 2,
+      title: "Club Bangers",
+      dj: "DJ Nova",
+      cover: "./images/event1.jpg",
+      src: "./audio/mix2.mp3",
+      ai: false,
+    },
+  ];
 
-/* ================= THEME TOGGLE ================= */
-function initThemeToggle() {
-    const toggleBtn = document.createElement("button");
-    toggleBtn.className = "theme-toggle";
-    toggleBtn.textContent = "🌙";
-    document.body.appendChild(toggleBtn);
+  state.queue = [...MIXES];
 
-    toggleBtn.addEventListener("click", () => {
-        document.body.classList.toggle("light-mode");
-        toggleBtn.textContent =
-            document.body.classList.contains("light-mode") ? "☀️" : "🌙";
-    });
-}
+  /* ===================== UTIL ===================== */
+  const formatTime = (t) => {
+    if (!t || isNaN(t)) return "0:00";
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
+  };
 
-/* ================= DJ MIXES ================= */
-function initDJMixes() {
-    const mixesContainer = document.getElementById("dj-mixes");
-    const globalPlayer = document.getElementById("global-player");
-    const playPauseBtn = document.getElementById("play-pause-btn");
-    const likeBtn = document.getElementById("like-btn");
-    const progressBar = document.getElementById("progress-bar");
-    const currentTimeEl = document.getElementById("current-time");
-    const durationEl = document.getElementById("duration");
-    const titleEl = document.getElementById("player-title");
-    const djEl = document.getElementById("player-dj");
-    const coverEl = document.getElementById("player-cover");
-    const searchInput = document.getElementById("mix-search");
-    const aiBox = document.getElementById("ai-mixes");
-    const canvas = document.getElementById("waveform");
+  const showPlayer = () => DOM.player.classList.remove("hidden");
 
-    if (!mixesContainer || !canvas) return;
+  /* ===================== QUEUE LOGIC ===================== */
+  const loadByIndex = (index) => {
+    if (index < 0 || index >= state.queue.length) return;
 
-    const ctx = canvas.getContext("2d");
-    const audio = new Audio();
-    const audioCtx = new AudioContext();
-    const analyser = audioCtx.createAnalyser();
-    const source = audioCtx.createMediaElementSource(audio);
+    const mix = state.queue[index];
+    state.currentIndex = index;
 
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination);
+    state.audio.src = mix.src;
+    state.audio.load();
 
-    let currentMix = null;
-    let allMixes = [];
-    const userSubscription =
-        JSON.parse(localStorage.getItem("subscription")) || "free";
+    DOM.cover.src = mix.cover;
+    DOM.title.textContent = mix.title;
+    DOM.dj.textContent = mix.dj;
 
-    /* ---------- CANVAS ---------- */
-    function resizeCanvas() {
-        canvas.width = canvas.clientWidth;
-        canvas.height = 100;
+    showPlayer();
+    initAudioContext();
+  };
+
+  const next = () => {
+    const nextIndex = (state.currentIndex + 1) % state.queue.length;
+    loadByIndex(nextIndex);
+    play();
+  };
+
+  const prev = () => {
+    const prevIndex =
+      (state.currentIndex - 1 + state.queue.length) % state.queue.length;
+    loadByIndex(prevIndex);
+    play();
+  };
+
+  /* ===================== PLAYBACK ===================== */
+  const play = async () => {
+    try {
+      await state.audio.play();
+      state.isPlaying = true;
+      DOM.playPauseBtn.textContent = "⏸";
+      drawWaveform();
+    } catch {
+      console.warn("Playback blocked until user interaction");
     }
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
+  };
 
-    document.addEventListener(
-        "click",
-        () => audioCtx.state === "suspended" && audioCtx.resume(),
-        { once: true }
+  const pause = () => {
+    state.audio.pause();
+    state.isPlaying = false;
+    DOM.playPauseBtn.textContent = "▶";
+  };
+
+  DOM.playPauseBtn.addEventListener("click", () =>
+    state.isPlaying ? pause() : play()
+  );
+
+  state.audio.addEventListener("ended", next);
+
+  /* ===================== PROGRESS ===================== */
+  state.audio.addEventListener("timeupdate", () => {
+    if (!state.audio.duration) return;
+    DOM.currentTime.textContent = formatTime(state.audio.currentTime);
+    DOM.duration.textContent = formatTime(state.audio.duration);
+    DOM.progressBar.value =
+      (state.audio.currentTime / state.audio.duration) * 100;
+  });
+
+  DOM.progressBar.addEventListener("input", () => {
+    if (!state.audio.duration) return;
+    state.audio.currentTime =
+      (DOM.progressBar.value / 100) * state.audio.duration;
+  });
+
+  /* ===================== WAVEFORM ===================== */
+  const initAudioContext = () => {
+    if (state.audioCtx) return;
+
+    state.audioCtx = new (window.AudioContext ||
+      window.webkitAudioContext)();
+    state.analyser = state.audioCtx.createAnalyser();
+    state.analyser.fftSize = 2048;
+
+    state.sourceNode =
+      state.audioCtx.createMediaElementSource(state.audio);
+    state.sourceNode.connect(state.analyser);
+    state.analyser.connect(state.audioCtx.destination);
+  };
+
+  const drawWaveform = () => {
+    if (!DOM.canvas || !state.analyser) return;
+
+    const ctx = DOM.canvas.getContext("2d");
+    const buffer = new Uint8Array(state.analyser.frequencyBinCount);
+
+    const render = () => {
+      if (!state.isPlaying) return;
+
+      requestAnimationFrame(render);
+      state.analyser.getByteTimeDomainData(buffer);
+
+      ctx.clearRect(0, 0, DOM.canvas.width, DOM.canvas.height);
+      ctx.beginPath();
+
+      buffer.forEach((v, i) => {
+        const x = (i / buffer.length) * DOM.canvas.width;
+        const y = (v / 255) * DOM.canvas.height;
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      });
+
+      ctx.strokeStyle = "#d4af37";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    };
+
+    render();
+  };
+
+  /* ===================== MIX CARDS ===================== */
+  const createMixCard = (mix, index) => {
+    const card = document.createElement("article");
+    card.className = "dj-mix-card";
+    card.innerHTML = `
+      <img src="${mix.cover}" loading="lazy">
+      <h4>${mix.title}</h4>
+      <p>${mix.dj}</p>
+      <button>▶ Play</button>
+    `;
+
+    card.querySelector("button").onclick = () => {
+      loadByIndex(index);
+      play();
+    };
+
+    return card;
+  };
+
+  const renderMixes = (container, list) => {
+    list.forEach((mix, i) =>
+      container.appendChild(createMixCard(mix, i))
     );
+  };
 
-    /* ---------- DATA ---------- */
-    allMixes = [
-        {
-            title: "Sample Mix 1",
-            dj: "DJ Alpha",
-            audioUrl: "/audio/test1.mp3",
-            coverImage: "/images/deejay.jpg",
-        },
-        {
-            title: "Sample Mix 2",
-            dj: "DJ Beta",
-            audioUrl: "/audio/test2.mp3",
-            coverImage: "/images/deejay2.jpg",
-        },
-    ];
+  /* ===================== LAZY LOAD ===================== */
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      renderMixes(e.target, state.queue);
+      obs.unobserve(e.target);
+    });
+  });
 
-    renderDjMixes(allMixes);
-    renderAI();
+  observer.observe(DOM.mixesContainer);
+  observer.observe(DOM.aiMixesContainer);
 
-    /* ---------- RENDER ---------- */
-    function renderDjMixes(mixes) {
-        mixesContainer.innerHTML = "";
-        mixes.forEach(mix => {
-            const card = document.createElement("div");
-            card.className = "dj-mix-card";
-            card.innerHTML = `
-                <img src="${mix.coverImage}" alt="${mix.title}">
-                <h3>${mix.title}</h3>
-                <p>${mix.dj}</p>
-                <button>▶ Play</button>
-            `;
-            card.querySelector("button").onclick = () => playMix(mix);
-            mixesContainer.appendChild(card);
-        });
-    }
+  /* ===================== SEARCH ===================== */
+  DOM.searchInput.addEventListener("input", (e) => {
+    const q = e.target.value.toLowerCase();
+    [...DOM.mixesContainer.children].forEach((card) => {
+      card.style.display = card.textContent.toLowerCase().includes(q)
+        ? "block"
+        : "none";
+    });
+  });
 
-    function playMix(mix) {
-        if (mix.premium && userSubscription !== "premium") {
-            alert("Upgrade to Premium");
-            return;
-        }
+  /* ===================== PWA REG ===================== */
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js");
+  }
 
-        currentMix = mix;
-        audio.src = mix.audioUrl;
-        audio.play();
-
-        titleEl.textContent = mix.title;
-        djEl.textContent = mix.dj;
-        coverEl.src = mix.coverImage;
-        globalPlayer?.classList.remove("hidden");
-        playPauseBtn.textContent = "⏸";
-    }
-
-    /* ---------- CONTROLS ---------- */
-    playPauseBtn.onclick = () => {
-        if (audio.paused) {
-            audio.play();
-            playPauseBtn.textContent = "⏸";
-        } else {
-            audio.pause();
-            playPauseBtn.textContent = "▶";
-        }
-    };
-
-    audio.ontimeupdate = () => {
-        progressBar.value = (audio.currentTime / audio.duration) * 100 || 0;
-        currentTimeEl.textContent = formatTime(audio.currentTime);
-        durationEl.textContent = formatTime(audio.duration);
-    };
-
-    progressBar.oninput = () => {
-        audio.currentTime = (progressBar.value / 100) * audio.duration;
-    };
-
-    if (searchInput) {
-        searchInput.addEventListener("input", () => {
-            const q = searchInput.value.toLowerCase();
-            renderDjMixes(
-                allMixes.filter(
-                    m =>
-                        m.title.toLowerCase().includes(q) ||
-                        m.dj.toLowerCase().includes(q)
-                )
-            );
-        });
-    }
-
-    /* ---------- AI ---------- */
-    function renderAI() {
-        if (!aiBox) return;
-        aiBox.innerHTML = "";
-        allMixes.slice(0, 3).forEach(mix => {
-            aiBox.innerHTML += `<p>${mix.title} — ${mix.dj}</p>`;
-        });
-    }
-
-    /* ---------- WAVEFORM ---------- */
-    function drawWaveform() {
-        requestAnimationFrame(drawWaveform);
-        const data = new Uint8Array(analyser.frequencyBinCount);
-        analyser.getByteTimeDomainData(data);
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.beginPath();
-        data.forEach((v, i) => {
-            const x = (i / data.length) * canvas.width;
-            const y = (v / 255) * canvas.height;
-            ctx.lineTo(x, y);
-        });
-        ctx.strokeStyle = "#D4AF37";
-        ctx.stroke();
-    }
-    drawWaveform();
-}
-
-/* ================= SERVICE WORKER ================= */
-function initServiceWorker() {
-    if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("/service-worker.js");
-    }
-}
+})();
