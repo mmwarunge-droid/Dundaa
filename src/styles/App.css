@@ -1,0 +1,142 @@
+/* ===== Root container ===== */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ===== DJ Mixes + AI Recommendations Sections ===== */
+.dj-mixes-section,
+.ai-recommendations {
+  margin: 2rem 0;
+}
+
+.dj-mixes-section h2,
+.ai-recommendations h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+/* ===== Cards Layout ===== */
+.dj-mixes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.dj-mix-card {
+  width: 200px;
+  background-color: #1a1a1a;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.dj-mix-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.dj-mix-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.dj-mix-card h3 {
+  margin: 0.5rem 0 0.2rem 0;
+  font-size: 1.1rem;
+}
+
+.dj-mix-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.dj-mix-card button {
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+/* ===== Waveform ===== */
+.waveform {
+  width: 100%;
+  height: 100px;
+  margin: 2rem 0;
+  border-radius: 8px;
+  background-color: #111;
+}
+
+/* ===== Global Player ===== */
+.global-player {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #1a1a1a;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 2rem;
+}
+
+.global-player img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.global-player .player-info {
+  flex: 1;
+  text-align: left;
+}
+
+.global-player h4 {
+  margin: 0 0 0.3rem 0;
+}
+
+.global-player p {
+  margin: 0;
+  color: #aaa;
+}
+
+.global-player .player-controls button {
+  font-size: 1.5rem;
+  background: #646cff;
+  color: #fff;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  border: none;
+  cursor: pointer;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .dj-mixes {
+    justify-content: center;
+  }
+
+  .dj-mix-card {
+    width: 45%;
+  }
+
+  .global-player {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .global-player .player-controls {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dj-mix-card {
+    width: 100%;
+  }
+}
