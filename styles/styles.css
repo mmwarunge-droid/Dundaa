@@ -1,0 +1,36 @@
+:root {
+  --black: #000;
+  --yellow: #FFD400;
+}
+
+body {
+  background: var(--black);
+  color: white;
+  font-family: system-ui;
+}
+
+.dj-mix-card {
+  background: #111;
+  border: 1px solid var(--yellow);
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+button {
+  background: var(--yellow);
+  color: black;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.global-player {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #000;
+  border-top: 2px solid var(--yellow);
+  display: flex;
+  padding: 1rem;
+}
